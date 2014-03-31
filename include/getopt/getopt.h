@@ -121,9 +121,15 @@ struct OptionContainer: public BasicOption
             if (*cur == short_opt || *cur == long_opt)
             {
                 cur = args.erase(cur);
-                *var = Converter<T>::convert(*cur);
-                cur = args.erase(cur);
-                break;              // finds first occurrence
+                if (cur != args.end())
+                {
+                    *var = Converter<T>::convert(*cur);
+                    cur = args.erase(cur);
+                    break;              // finds first occurrence
+                }
+                else
+                     break;         // if the last option's value is missing, it remains default
+
             }
         }
     }
@@ -160,8 +166,11 @@ struct OptionContainer< std::vector<T> >: public BasicOption
             if (*cur == short_opt || *cur == long_opt)
             {
                 cur = args.erase(cur);
-                var->push_back(Converter<T>::convert(*cur));
-                cur = args.erase(cur);
+                if (cur != args.end())
+                {
+                    var->push_back(Converter<T>::convert(*cur));
+                    cur = args.erase(cur);
+                }
                 --cur;
             }
         }

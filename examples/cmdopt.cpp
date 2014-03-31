@@ -24,30 +24,24 @@ int main(int argc, char** argv)
     ;
     bool negate = ops >> Present('n', "negate", "negate the function");
 
-    std::string infilename;
+    // NB: PosOptions must be read last
+    std::string infilename, outfilename;
     if ( (ops >> Present('h', "help", "show help message")) ||
-        !(ops >> PosOption(infilename)))
+        !(ops >> PosOption(infilename) >> PosOption(outfilename)))
     {
-        std::cout << "Usage: " << argv[0] << " [options] INFILE\n";
+        std::cout << "Usage: " << argv[0] << " [options] INFILE OUTFILE\n\n";
         std::cout << "Sample options program\n\n";
         std::cout << ops << std::endl;
         return 1;
     }
 
-    // Alternative form
-    //if ( (ops >> Present('h', "help", "show help message") ||
-    //    !(ops >> PosOption(infilename, "INFILE")))
-    //{
-    //    std::cout << ops.usage("Sample options program");
-    //    return 1;
-    //}
-
-    std::cout << "Infilename: " << infilename << std::endl;
-    std::cout << "Name:       " << name       << std::endl;
-    std::cout << "Area:       " << area       << std::endl;
-    std::cout << "Age:        " << age        << std::endl;
-    std::cout << "Negate:     " << negate     << std::endl;
-    std::cout << "Coorindates:" << std::endl;
+    std::cout << "Infilename:  " << infilename  << std::endl;
+    std::cout << "Outfilename: " << outfilename << std::endl;
+    std::cout << "Name:        " << name        << std::endl;
+    std::cout << "Area:        " << area        << std::endl;
+    std::cout << "Age:         " << age         << std::endl;
+    std::cout << "Negate:      " << negate      << std::endl;
+    std::cout << "Coorindates: " << std::endl;
     for (unsigned i = 0; i < coordinates.size(); ++i)
         std::cout << "  " << coordinates[i] << std::endl;
 }
