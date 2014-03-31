@@ -29,6 +29,24 @@ struct Traits<int>
 };
 
 template<>
+struct Traits<unsigned>
+{
+    static std::string  type_string()               { return "UNSIGNED INT"; }
+};
+
+template<>
+struct Traits<float>
+{
+    static std::string  type_string()               { return "FLOAT"; }
+};
+
+template<>
+struct Traits<double>
+{
+    static std::string  type_string()               { return "DOUBLE"; }
+};
+
+template<>
 struct Traits<std::string>
 {
     static std::string  type_string()               { return "STRING"; }

@@ -13,11 +13,13 @@ int main(int argc, char** argv)
     getopt::Options     ops(argc, argv);
 
     std::string                     name    = "Pepper";
-    int                             age     = 7;
+    unsigned int                    age     = 7;
+    double                          area    = 1.0;
     std::vector<std::string>        coordinates;
     ops
         >> Option(      "name",     name,           "name of the person")
         >> Option('a',  "age",      age,            "age of the person")
+        >> Option(      "area",     area,           "some area")
         >> Option('c',  "coord",    coordinates,    "coordinates")
     ;
     bool negate = ops >> Present('n', "negate", "negate the function");
@@ -42,6 +44,7 @@ int main(int argc, char** argv)
 
     std::cout << "Infilename: " << infilename << std::endl;
     std::cout << "Name:       " << name       << std::endl;
+    std::cout << "Area:       " << area       << std::endl;
     std::cout << "Age:        " << age        << std::endl;
     std::cout << "Negate:     " << negate     << std::endl;
     std::cout << "Coorindates:" << std::endl;
