@@ -1,3 +1,6 @@
+#ifndef OPTS_OPTS_H
+#define OPTS_OPTS_H
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -312,3 +315,5 @@ Options::operator>>(const PosOptionContainer<T>& poc)
 }
 
 }
+
+#endif
