@@ -2,15 +2,15 @@
 #include <vector>
 #include <iostream>
 
-#include <getopt/getopt.h>
+#include <opts/opts.h>
 
 int main(int argc, char** argv)
 {
-    using getopt::Option;
-    using getopt::Present;
-    using getopt::PosOption;
+    using opts::Option;
+    using opts::Present;
+    using opts::PosOption;
 
-    getopt::Options     ops(argc, argv);
+    opts::Options     ops(argc, argv);
 
     std::string                     name    = "Pepper";
     unsigned int                    age     = 7;

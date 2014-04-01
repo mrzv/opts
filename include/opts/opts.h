@@ -4,7 +4,7 @@
 #include <list>
 #include <vector>
 
-namespace getopt {
+namespace opts {
 
 // Converters
 template<class T>
