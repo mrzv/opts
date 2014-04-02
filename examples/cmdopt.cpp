@@ -13,14 +13,16 @@ int main(int argc, char** argv)
     opts::Options     ops(argc, argv);
 
     std::string                     name    = "Pepper";
+    std::string                     prefix  = ".";
     unsigned int                    age     = 7;
     double                          area    = 1.0;
     std::vector<std::string>        coordinates;
     ops
-        >> Option(      "name",     name,           "name of the person")
-        >> Option('a',  "age",      age,            "age of the person")
-        >> Option(      "area",     area,           "some area")
-        >> Option('c',  "coord",    coordinates,    "coordinates")
+        >> Option(      "name",     name,                           "name of the person")
+        >> Option('p',  "path",     prefix,         "PREFIX",       "path prefix")
+        >> Option('a',  "age",      age,                            "age of the person")
+        >> Option(      "area",     area,                           "some area")
+        >> Option('c',  "coord",    coordinates,    "X Y ...",      "coordinates")
     ;
     bool negate = ops >> Present('n', "negate", "negate the function");
 
@@ -38,6 +40,7 @@ int main(int argc, char** argv)
     std::cout << "Infilename:  " << infilename  << std::endl;
     std::cout << "Outfilename: " << outfilename << std::endl;
     std::cout << "Name:        " << name        << std::endl;
+    std::cout << "Prefix:      " << prefix      << std::endl;
     std::cout << "Area:        " << area        << std::endl;
     std::cout << "Age:         " << age         << std::endl;
     std::cout << "Negate:      " << negate      << std::endl;

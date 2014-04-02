@@ -71,9 +71,9 @@ struct BasicOption
     {
         out << "   ";
         if (s)
-            out << '-' << s << ",";
+            out << '-' << s << ", ";
         else
-            out << "   ";
+            out << "    ";
 
         out << "--" << l << ' ';
 
@@ -103,8 +103,12 @@ struct BasicOption
 template<class T>
 struct OptionContainer: public BasicOption
 {
-                    OptionContainer(char s_, const std::string& l_, T& var_, const std::string& help_):
-                        BasicOption(s_, l_, default_value(var_), Traits<T>::type_string(), help_),
+                    OptionContainer(char               s_,
+                                    const std::string& l_,
+                                    T&                 var_,
+                                    const std::string& help_,
+                                    const std::string& type_ = Traits<T>::type_string()):
+                        BasicOption(s_, l_, default_value(var_), type_, help_),
                         var(&var_)                  {}
 
     static
@@ -143,8 +147,12 @@ struct OptionContainer: public BasicOption
 template<class T>
 struct OptionContainer< std::vector<T> >: public BasicOption
 {
-                    OptionContainer(char s_, const std::string& l_, std::vector<T>& var_, const std::string& help_):
-                        BasicOption(s_, l_, default_value(var_), "SEQUENCE", help_),
+                    OptionContainer(char               s_,
+                                    const std::string& l_,
+                                    std::vector<T>&    var_,
+                                    const std::string& help_,
+                                    const std::string& type_ = "SEQUENCE"):
+                        BasicOption(s_, l_, default_value(var_), type_, help_),
                         var(&var_)                  { }
 
     static
@@ -189,8 +197,17 @@ Option(char s, const std::string& l, T& var, const std::string& help)       { re
 
 template<class T>
 OptionContainer<T>
+Option(char s, const std::string& l, T& var,
+       const std::string& type, const std::string& help)                    { return OptionContainer<T>(s, l, var, help, type); }
+
+template<class T>
+OptionContainer<T>
 Option(const std::string& l, T& var, const std::string& help)               { return OptionContainer<T>(0, l, var, help); }
 
+template<class T>
+OptionContainer<T>
+Option(const std::string& l, T& var,
+       const std::string& type, const std::string& help)                    { return OptionContainer<T>(0, l, var, help, type); }
 
 // Present
 struct PresentContainer: public BasicOption
