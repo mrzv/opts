@@ -1,3 +1,8 @@
+/**
+ * Author: Dmitriy Morozov <dmitriy@mrzv.org>
+ * The interface is heavily influenced by GetOptPP (https://code.google.com/p/getoptpp/).
+ */
+
 #ifndef OPTS_OPTS_H
 #define OPTS_OPTS_H
 
