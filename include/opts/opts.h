@@ -37,9 +37,21 @@ struct Traits<int>
 };
 
 template<>
+struct Traits<short int>
+{
+    static std::string  type_string()               { return "SHORT INT"; }
+};
+
+template<>
 struct Traits<unsigned>
 {
     static std::string  type_string()               { return "UNSIGNED INT"; }
+};
+
+template<>
+struct Traits<short unsigned>
+{
+    static std::string  type_string()               { return "SHORT UNSIGNED INT"; }
 };
 
 template<>
