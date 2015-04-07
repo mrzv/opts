@@ -170,7 +170,7 @@ struct OptionContainer< std::vector<T> >: public BasicOption
                                     const std::string& help_,
                                     const std::string& type_ = "SEQUENCE"):
                         BasicOption(s_, l_, default_value(var_), type_, help_),
-                        var(&var_)                  { }
+                        var(&var_), first(true)             { }
 
     static
     std::string     default_value(const std::vector<T>& def)
@@ -193,6 +193,12 @@ struct OptionContainer< std::vector<T> >: public BasicOption
         {
             if (*cur == short_opt || *cur == long_opt)
             {
+                if (first)
+                {
+                    var->clear();
+                    first = false;
+                }
+
                 cur = args.erase(cur);
                 if (cur != args.end())
                 {
@@ -205,6 +211,7 @@ struct OptionContainer< std::vector<T> >: public BasicOption
     }
 
     std::vector<T>* var;
+    mutable bool    first;
 };
 
 
