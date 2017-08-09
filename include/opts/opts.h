@@ -1,6 +1,9 @@
 /**
  * Author: Dmitriy Morozov <dmitriy@mrzv.org>
  * The interface is heavily influenced by GetOptPP (https://code.google.com/p/getoptpp/).
+ *
+ * History:
+ *  - 2015-06-01: added Traits<...>::type_string() for long, unsigned long
  */
 
 #ifndef OPTS_OPTS_H
@@ -43,6 +46,12 @@ struct Traits<short int>
 };
 
 template<>
+struct Traits<long>
+{
+    static std::string  type_string()               { return "LONG"; }
+};
+
+template<>
 struct Traits<unsigned>
 {
     static std::string  type_string()               { return "UNSIGNED INT"; }
@@ -52,6 +61,12 @@ template<>
 struct Traits<short unsigned>
 {
     static std::string  type_string()               { return "SHORT UNSIGNED INT"; }
+};
+
+template<>
+struct Traits<unsigned long>
+{
+    static std::string  type_string()               { return "UNSIGNED LONG"; }
 };
 
 template<>
@@ -179,7 +194,7 @@ struct OptionContainer< std::vector<T> >: public BasicOption
         oss << "(";
         if (def.size())
             oss << def[0];
-        for (int i = 1; i < def.size(); ++i)
+        for (size_t i = 1; i < def.size(); ++i)
             oss << ", " << def[i];
         oss << ")";
         return oss.str();
