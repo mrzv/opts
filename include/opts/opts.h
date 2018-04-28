@@ -181,7 +181,7 @@ struct OptionContainer<bool>: public BasicOption
                                     bool&              var_,
                                     const std::string& help_):
                         BasicOption(s_, l_, "", "", help_),
-                        var(&var_)                  {}
+                        var(&var_)                          { *var = false; }
 
     bool            parse(std::size_t, char**, std::size_t&, std::size_t) override  { *var = true; return true; }
     bool            set(std::string) override                                       { return true; }

@@ -16,8 +16,7 @@ int main(int argc, char** argv)
     unsigned int                    age     = 7;
     double                          area    = 1.0;
     std::vector<std::string>        coordinates;
-    bool                            negate  = false;
-    bool                            help    = false;
+    bool negate, help;
     ops
         >> Option(      "name",     name,                           "name of the person")
         >> Option('p',  "path",     prefix,         "PREFIX",       "path prefix")
