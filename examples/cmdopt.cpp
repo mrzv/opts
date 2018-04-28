@@ -7,37 +7,41 @@
 int main(int argc, char** argv)
 {
     using opts::Option;
-    using opts::Present;
     using opts::PosOption;
 
-    opts::Options     ops(argc, argv);
+    opts::Options ops;
 
     std::string                     name    = "Pepper";
     std::string                     prefix  = ".";
     unsigned int                    age     = 7;
     double                          area    = 1.0;
     std::vector<std::string>        coordinates;
+    bool                            negate  = false;
+    bool                            help    = false;
     ops
         >> Option(      "name",     name,                           "name of the person")
         >> Option('p',  "path",     prefix,         "PREFIX",       "path prefix")
         >> Option('a',  "age",      age,                            "age of the person")
         >> Option(      "area",     area,                           "some area")
         >> Option('c',  "coord",    coordinates,    "X Y ...",      "coordinates")
+        >> Option('n',  "negate",   negate,                         "negate the function")
+        >> Option('h',  "help",     help,                           "show help message")
     ;
-    bool negate = ops >> Present('n', "negate", "negate the function");
 
     // NB: PosOptions must be read last
     std::string infilename, outfilename;
-    if ( (ops >> Present('h', "help", "show help message")) ||
-        !(ops >> PosOption(infilename) >> PosOption(outfilename)))
+    int repeat;
+    if ( !ops.parse(argc, argv) || help ||
+        !(ops >> PosOption(infilename) >> PosOption(repeat) >> PosOption(outfilename)))
     {
-        std::cout << "Usage: " << argv[0] << " [options] INFILE OUTFILE\n\n";
+        std::cout << "Usage: " << argv[0] << " [options] INFILE REPEAT OUTFILE\n\n";
         std::cout << "Sample options program\n\n";
         std::cout << ops << std::endl;
         return 1;
     }
 
     std::cout << "Infilename:  " << infilename  << std::endl;
+    std::cout << "Repeat:      " << repeat      << std::endl;
     std::cout << "Outfilename: " << outfilename << std::endl;
     std::cout << "Name:        " << name        << std::endl;
     std::cout << "Prefix:      " << prefix      << std::endl;
