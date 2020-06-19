@@ -1,4 +1,4 @@
-# opts #
+# opts
 
 Single-header command-line option parsing library.
 
